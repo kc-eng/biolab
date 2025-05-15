@@ -18,10 +18,12 @@ def visualize_structure(pdb_id="1A3N", save_plot=False):
         atoms = np.array([atom.coord for atom in structure.get_atoms()])
         
         # Create 3D plot
-        fig = plt.figure(figsize=(10, 10))
+        fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         ax.scatter(*atoms.T, s=5, alpha=0.5)
         ax.set_title(f"{pdb_id} Structure")
+        plt.tight_layout()
+        plt.show()
         
         if save_plot:
             # Save plot to bytes

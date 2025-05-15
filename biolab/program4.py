@@ -31,4 +31,27 @@ def __str__():
 ATGCGTACGT
 >seq2
 GCTAGCTAGC"""
-    return convert_fasta_to_genbank(example_fasta) 
+    return convert_fasta_to_genbank(example_fasta)
+
+records = []
+
+for record in SeqIO.parse("eg.fasta", "fasta"):
+    new = SeqRecord(
+        record.seq,
+        id=record.id,
+        name="gene",
+        description=record.description,
+        annotations={
+            "molecule_type": "DNA"
+        }
+    )
+    records.append(new)
+
+file = open("4th_genbank.gb", "w")
+SeqIO.write(records, file, "genbank")
+file.close()
+
+file = open("4th_genbank.gb", "r")
+for content in SeqIO.parse(file, "genbank"):
+    print(content)
+file.close() 

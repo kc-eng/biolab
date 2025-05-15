@@ -13,4 +13,9 @@ def __str__():
         alignment = muscle_alignment()
         return str(alignment)
     except Exception as e:
-        return f"Error: {str(e)}" 
+        return f"Error: {str(e)}"
+
+subprocess.run(["muscle", "-in", "eg.fasta", "-out", "aligned.fasta"])
+alignment = AlignIO.read("aligned.fasta", "fasta")
+
+print(alignment) 

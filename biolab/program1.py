@@ -1,18 +1,21 @@
 from Bio.Seq import Seq
 
-def dna_manipulation(dna_sequence=None):
-    if dna_sequence is None:
-        dna_sequence = "ATGCGTACGTAGCTAGCTAGCTAGCTAGCTAGC"
-    
-    dna_seq = Seq(dna_sequence)
-    result = {
-        "DNA Sequence": str(dna_seq),
-        "Sliced Sequence": str(dna_seq[3:11]),
-        "Concatenated": str(dna_seq[3:11] + Seq("TGCA")),
-        "RNA": str(dna_seq[3:11].transcribe()),
-        "Protein": str(dna_seq[3:11].translate())
-    }
-    return result
+dna_seq=Seq("ATGCGTACGTAGCTAGCTAGCTAGCTAGCTAGC")
+print("DNA Sequence: ", dna_seq)
+
+sliced_seq=dna_seq[3:11]
+print("Sliced Sequence: ", sliced_seq)
+
+another_seq=Seq("TGCA")
+concatenated_seq=sliced_seq+another_seq
+
+print("Concatenated: ",concatenated_seq)
+
+rna_seq=concatenated_seq.transcribe()
+print("RNA: ",rna_seq)
+
+protein_seq=rna_seq.translate()
+print("Protein: ",protein_seq)
 
 def __str__():
     """Return the example output when the module is printed"""

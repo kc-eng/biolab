@@ -23,4 +23,11 @@ def __str__():
     return f"""Pairwise Alignment Example:
 Score: {result['score']}
 Alignment:
-{result['aligned']}""" 
+{result['aligned']}"""
+
+aligner = PairwiseAligner()
+alignment = aligner.align("AGTACACTGGT", "AGTACGCTGGT")
+print(alignment)
+print(alignment[0])
+print(alignment[2])
+print(alignment[0].score) 

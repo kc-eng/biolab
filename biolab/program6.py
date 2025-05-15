@@ -37,4 +37,14 @@ Example output format:
     "description": "Homo sapiens ...",
     "sequence_preview": "ATGCGT...",
     "length": 1234
-}""" 
+}"""
+
+Entrez.email = "nikhilsingh.is22@bmsce.ac.in"
+handle = Entrez.efetch(db="nucleotide", id="NM_001301717", rettype="gb", retmode="text")
+
+record = SeqIO.read(handle, "genbank")
+print(record)
+print(record.id)
+print(record.description)
+# print(record.features)
+print(record.seq[:30]) 
