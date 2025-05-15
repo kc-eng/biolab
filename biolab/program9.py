@@ -44,6 +44,20 @@ ASCII representation:
     except Exception as e:
         return f"Error constructing tree: {str(e)}"
 
+def create_phylogenetic_tree(alignment_file="aligned.fasta"):
+    alignment = AlignIO.read(alignment_file, "fasta")
+    dm = DistanceCalculator("identity").get_distance(alignment)
+    tree = DistanceTreeConstructor().upgma(dm)
+    
+    Phylo.draw(tree)
+    # Print ASCII tree
+    Phylo.draw_ascii(tree)
+    
+    # Save to file
+    Phylo.write(tree, "tree.newick", "newick")
+    return tree
+
+# Execute the code directly when the module is run
 alignment = AlignIO.read("aligned.fasta", "fasta")
 dm = DistanceCalculator("identity").get_distance(alignment)
 tree = DistanceTreeConstructor().upgma(dm)

@@ -1,21 +1,13 @@
 import subprocess
 from Bio import AlignIO
 
-def muscle_alignment(input_file="eg.fasta", output_file="aligned.fasta"):
-    """Perform multiple sequence alignment using MUSCLE"""
+def run_muscle(input_file="eg.fasta", output_file="aligned.fasta"):
     subprocess.run(["muscle", "-in", input_file, "-out", output_file])
     alignment = AlignIO.read(output_file, "fasta")
+    print(alignment)
     return alignment
 
-def __str__():
-    """Return example output when the module is printed"""
-    try:
-        alignment = muscle_alignment()
-        return str(alignment)
-    except Exception as e:
-        return f"Error: {str(e)}"
-
+# Execute the code directly when the module is run
 subprocess.run(["muscle", "-in", "eg.fasta", "-out", "aligned.fasta"])
 alignment = AlignIO.read("aligned.fasta", "fasta")
-
 print(alignment) 

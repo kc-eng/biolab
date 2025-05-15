@@ -7,6 +7,7 @@ def read_fasta(file_name):
         print("Header: ",record.description)
         print("Sequence: ",record.seq)
         print()
+    return list(SeqIO.parse(file_name, "fasta"))
 
 def __str__():
     """Return example output when the module is printed"""
@@ -24,6 +25,6 @@ GCTAGCTAGC"""
     for record in SeqIO.parse(fasta_file, "fasta"):
         records.append(f"Header: {record.description}\nSequence: {record.seq}\n")
 
+# Execute the code directly when the module is run
 fasta_file="eg.fasta"
-
 read_fasta(fasta_file) 

@@ -60,4 +60,40 @@ Number of atoms: {result['num_atoms']}
 Dimensions:
   X: {result['dimensions']['x']}
   Y: {result['dimensions']['y']}
-  Z: {result['dimensions']['z']}""" 
+  Z: {result['dimensions']['z']}"""
+
+def visualize_pdb_structure(pdb_id="1A3N"):
+    # 1. Download and parse PDB file (using mmCif format)
+    pdbl = PDBList()
+    cif_file = pdbl.retrieve_pdb_file(pdb_id, pdir=".", file_format="mmCif")
+    structure = MMCIFParser().get_structure(pdb_id, cif_file)
+
+    # 2. Get all atom coordinates
+    atoms = np.array([atom.coord for atom in structure.get_atoms()])
+
+    # 3. Simple 3D plot
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.scatter(*atoms.T, s=5, alpha=0.5)
+    ax.set_title(f"{pdb_id} Structure")
+    plt.tight_layout()
+    plt.show()
+    return structure
+
+# Execute the code directly when the module is run
+# 1. Download and parse PDB file (using mmCif format)
+pdb_id = "1A3N"  # Example: Hemoglobin
+pdbl = PDBList()
+cif_file = pdbl.retrieve_pdb_file(pdb_id, pdir=".", file_format="mmCif")
+structure = MMCIFParser().get_structure(pdb_id, cif_file)
+
+# 2. Get all atom coordinates
+atoms = np.array([atom.coord for atom in structure.get_atoms()])
+
+# 3. Simple 3D plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(*atoms.T, s=5, alpha=0.5)
+ax.set_title(f"{pdb_id} Structure")
+plt.tight_layout()
+plt.show() 

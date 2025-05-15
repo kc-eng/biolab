@@ -39,6 +39,18 @@ Example output format:
     "length": 1234
 }"""
 
+def fetch_genbank_record(accession="NM_001301717", email="nikhilsingh.is22@bmsce.ac.in"):
+    Entrez.email = email
+    handle = Entrez.efetch(db="nucleotide", id=accession, rettype="gb", retmode="text")
+    record = SeqIO.read(handle, "genbank")
+    print(record)
+    print(record.id)
+    print(record.description)
+    # print(record.features)
+    print(record.seq[:30])
+    return record
+
+# Execute the code directly when the module is run
 Entrez.email = "nikhilsingh.is22@bmsce.ac.in"
 handle = Entrez.efetch(db="nucleotide", id="NM_001301717", rettype="gb", retmode="text")
 

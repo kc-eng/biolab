@@ -25,6 +25,16 @@ Score: {result['score']}
 Alignment:
 {result['aligned']}"""
 
+def perform_alignment(seq1="AGTACACTGGT", seq2="AGTACGCTGGT"):
+    aligner = PairwiseAligner()
+    alignment = aligner.align(seq1, seq2)
+    print(alignment)
+    print(alignment[0])
+    print(alignment[2])
+    print(alignment[0].score)
+    return alignment
+
+# Execute the code directly when the module is run
 aligner = PairwiseAligner()
 alignment = aligner.align("AGTACACTGGT", "AGTACGCTGGT")
 print(alignment)
