@@ -26,18 +26,20 @@ def fetch_genbank(accession="NM_001301717", email=None):
     except Exception as e:
         return {"error": str(e)}
 
-def __str__():
-    """Return example output when the module is printed"""
-    return """To use this module, call:
-fetch_genbank(accession="NM_001301717", email="your.email@example.com")
+PROGRAM_TEXT = '''from Bio import Entrez, SeqIO
 
-Example output format:
-{
-    "id": "NM_001301717",
-    "description": "Homo sapiens ...",
-    "sequence_preview": "ATGCGT...",
-    "length": 1234
-}"""
+Entrez.email = "nikhilsingh.is22@bmsce.ac.in"
+handle = Entrez.efetch(db="nucleotide", id="NM_001301717", rettype="gb", retmode="text")
+
+record = SeqIO.read(handle, "genbank")
+print(record)
+print(record.id)
+print(record.description)
+# print(record.features)
+print(record.seq[:30])'''
+
+def __str__():
+    return PROGRAM_TEXT
 
 def fetch_genbank_record(accession="NM_001301717", email="nikhilsingh.is22@bmsce.ac.in"):
     Entrez.email = email

@@ -58,4 +58,60 @@ file.close()
 file = open("4th_genbank.gb", "r")
 for content in SeqIO.parse(file, "genbank"):
     print(content)
+file.close()
+
+PROGRAM_TEXT = '''from Bio import SeqIO
+from Bio.SeqRecord import SeqRecord
+
+records=[]
+
+for record in SeqIO.parse("eg.fasta","fasta"):
+    new=SeqRecord(
+        record.seq,
+        id=record.id,
+        name="gene",
+        description=record.description,
+        annotations={
+            "molecule_type":"DNA"
+        }
+    )
+    records.append(new)
+   
+file=open("4th_genbank.gb","w")
+SeqIO.write(records,file,"genbank")
+file.close()
+
+file=open("4th_genbank.gb","r")
+for content in SeqIO.parse(file,"genbank"):
+    print(content)
+file.close()'''
+
+def __str__():
+    return PROGRAM_TEXT
+
+# The actual program code
+from Bio import SeqIO
+from Bio.SeqRecord import SeqRecord
+
+records=[]
+
+for record in SeqIO.parse("eg.fasta","fasta"):
+    new=SeqRecord(
+        record.seq,
+        id=record.id,
+        name="gene",
+        description=record.description,
+        annotations={
+            "molecule_type":"DNA"
+        }
+    )
+    records.append(new)
+   
+file=open("4th_genbank.gb","w")
+SeqIO.write(records,file,"genbank")
+file.close()
+
+file=open("4th_genbank.gb","r")
+for content in SeqIO.parse(file,"genbank"):
+    print(content)
 file.close() 

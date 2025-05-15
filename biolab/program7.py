@@ -17,13 +17,16 @@ def pairwise_alignment(seq1="AGTACACTGGT", seq2="AGTACGCTGGT"):
         }
     }
 
+PROGRAM_TEXT = '''from Bio.Align import PairwiseAligner
+aligner = PairwiseAligner()
+alignment = aligner.align("AGTACACTGGT", "AGTACGCTGGT")
+print(alignment)
+print(alignment[0])
+print(alignment[2])
+print(alignment[0].score)'''
+
 def __str__():
-    """Return example output when the module is printed"""
-    result = pairwise_alignment()
-    return f"""Pairwise Alignment Example:
-Score: {result['score']}
-Alignment:
-{result['aligned']}"""
+    return PROGRAM_TEXT
 
 def perform_alignment(seq1="AGTACACTGGT", seq2="AGTACGCTGGT"):
     aligner = PairwiseAligner()
@@ -32,7 +35,6 @@ def perform_alignment(seq1="AGTACACTGGT", seq2="AGTACGCTGGT"):
     print(alignment[0])
     print(alignment[2])
     print(alignment[0].score)
-    return alignment
 
 # Execute the code directly when the module is run
 aligner = PairwiseAligner()

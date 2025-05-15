@@ -67,4 +67,36 @@ Phylo.draw(tree)
 Phylo.draw_ascii(tree)
 
 # Save to file
+Phylo.write(tree, "tree.newick", "newick")
+
+PROGRAM_TEXT = '''from Bio import Phylo, AlignIO
+from Bio.Phylo.TreeConstruction import DistanceCalculator, DistanceTreeConstructor
+
+alignment = AlignIO.read("aligned.fasta", "fasta")
+dm = DistanceCalculator("identity").get_distance(alignment)
+tree = DistanceTreeConstructor().upgma(dm)
+
+Phylo.draw(tree)
+# Print ASCII tree
+Phylo.draw_ascii(tree)
+
+# Save to file
+Phylo.write(tree, "tree.newick", "newick")'''
+
+def __str__():
+    return PROGRAM_TEXT
+
+# The actual program code
+from Bio import Phylo, AlignIO
+from Bio.Phylo.TreeConstruction import DistanceCalculator, DistanceTreeConstructor
+
+alignment = AlignIO.read("aligned.fasta", "fasta")
+dm = DistanceCalculator("identity").get_distance(alignment)
+tree = DistanceTreeConstructor().upgma(dm)
+
+Phylo.draw(tree)
+# Print ASCII tree
+Phylo.draw_ascii(tree)
+
+# Save to file
 Phylo.write(tree, "tree.newick", "newick") 
